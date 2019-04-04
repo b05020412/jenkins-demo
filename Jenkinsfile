@@ -38,17 +38,7 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
-            steps {
-                retry(3) {
-                    sh './flakey-deploy.sh'
-                }
 
-                timeout(time: 3, unit: 'MINUTES') {
-                    sh './health-check.sh'
-                }
-            }
-        }
    
     }
     
@@ -64,7 +54,7 @@ pipeline {
             echo 'I am unstable :/'
         }
         failure {
-            mail to: 'team@example.com',
+            mail to: 'team1@example.com',
              subject: "Failed Pipeline: ",
              body: "Something is wrong with "
         }
