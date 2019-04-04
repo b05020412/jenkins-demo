@@ -64,7 +64,7 @@ pipeline {
             echo 'I am unstable :/'
         }
         failure {
-            mail to: 'team@example.com',
+            mail to: 'team1@example.com',
              subject: "Failed Pipeline: ",
              body: "Something is wrong with "
         }
