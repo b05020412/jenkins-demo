@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label '2'
-    }
+    agent any
     
     environment {
         DISABLE_AUTH = 'true'
@@ -34,7 +32,7 @@ pipeline {
 
         stage('Deploy - Production') {
             steps {
-                echo 'Deploy - Productionnew3'
+                echo 'Deploy - Production updated 20190409'
             }
         }
         
