@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label '2'
-    }
+    agent any
     
     environment {
         DISABLE_AUTH = 'true'
