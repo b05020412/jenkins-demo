@@ -13,6 +13,8 @@ pipeline {
             steps {
                 echo 'Building new2'
                 sh 'printenv'
+                inventory_file = "uca_"+"${params.STAGE}"
+                echo inventory_file        
             }
         }
         stage('Test') {
