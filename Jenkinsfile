@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'sslave-172-31-25-236'
+        label 'slave-172-31-25-236'
     }
     
     environment {
