@@ -1,5 +1,4 @@
 pipeline {
-    def inventory_file = ''
     agent {
         label 'sslave-172-31-25-236'
     }
