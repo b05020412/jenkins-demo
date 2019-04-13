@@ -46,48 +46,13 @@ node('maven') {
     try {
         stage ('build'){
             
-            // Checkout Source Code
-            git url: "${git_url}${git_repo}", branch: "$params.BRANCH", credentialsId: "sds-github"
-            
-            // Fetch Maven Settings and run maven build 
-            configFileProvider([configFile(fileId: "${nexusSettingFileId}", variable: 'MAVEN_SETTINGS')]) {
-                def stage = stage_map[params.STAGE]
-                def buildCmd = "mvn -s ${MAVEN_SETTINGS} ${buildCmdParams}${stage}"
-                sh buildCmd
+            sh "git clone https://github.com/spring-projects/spring-petclinic.git"
+            sh "cd spring-petclinic"
+            sh "./mvnw package" 
             }
             
-            // Stash the binary so that it can be uploaded to stable nexus repository once the release is successfu
-            stash includes: "$jar", name: "jars"
-            
-            // Upload binary to nexus using the Jenkins managed Nexus Credentials
-            nexusArtifactUploader(
-                nexusVersion: 'nexus3',
-                protocol: 'http',
-                nexusUrl: "${nexusRepository}",
-                groupId: "uca/${params.STAGE}",
-                version: '0.0.1',
-                repository: 'samsungtv',
-                credentialsId: "${nexusCredentialID}",
-                artifacts: [
-                  [
-                    artifactId: 'batch',
-                    classifier: 'SNAPSHOT',
-                    file: "${jar}",
-                    type: 'jar'
-                  ]
-                ]
-            )
-        }
         
-        // SonarQube Analysis
-      /*  stage('Sonarqube analysis') {
-            def scannerHome = tool 'sonar-runner-auto';
-            print scannerHome
-            withSonarQubeEnv('sonarserver') {
-                sh "${scannerHome}/bin/sonar-scanner -X\
-                -Dsonar.analysis.mode=publish"
-            }
-        }*/
+
     } catch(e) {
         echo "Exception raised ${e}"
         status = false
