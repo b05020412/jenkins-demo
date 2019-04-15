@@ -14,9 +14,9 @@ pipeline {
             sh 'printenv'
           }
         }
-        stage('') {
+        stage('Stage1') {
           steps {
-            git(url: 'https://github.com/b05020412//jenkins-demo', branch: 'master', credentialsId: 'ss', poll: true)
+            git(url: 'https://github.com/b05020412//jenkins-demo', branch: 'master', credentialsId: 'ss')
           }
         }
       }
