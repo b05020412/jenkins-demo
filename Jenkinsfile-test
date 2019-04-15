@@ -47,7 +47,7 @@ node('maven') {
         stage ('build'){
             
             sh "git clone https://github.com/spring-projects/spring-petclinic.git"
-            sh "cd spring-petclinic"
+            sh "cd /root/.jenkins/workspace/petclinic/spring-petclinic"
             sh "pwd"
             sh "./mvnw package" 
             }
