@@ -17,6 +17,7 @@ pipeline {
         stage('Stage1') {
           steps {
             git(url: 'https://github.com/b05020412//jenkins-demo', branch: 'master', credentialsId: 'ss')
+            stash(name: '111', excludes: '2', includes: '33')
           }
         }
       }
