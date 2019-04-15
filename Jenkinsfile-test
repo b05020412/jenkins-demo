@@ -168,5 +168,26 @@ node('master') {
         {
             currentBuild.result = 'FAILURE'
         }        
-    }    
+    } 
+    
+    post {
+        always {
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            mail to: 'team1@example.com',
+             subject: "Failed Pipeline: ",
+             body: "Something is wrong with "
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+    }
 }
